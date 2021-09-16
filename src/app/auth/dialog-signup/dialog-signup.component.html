@@ -1,0 +1,70 @@
+<div fxLayout fxLayout.lt-lg="column">
+  <div class="loginLogo" fxFlex="50%" fxFlex.lt-lg="100%" fxLayout="column">
+    <div fxFlex>
+      <lottie-player
+        src="../../../assets/json/lf20_yupefrh2.json"
+        background="transparent"
+        speed="1"
+        style="width: 100%"
+        loop
+        autoplay
+      ></lottie-player>
+    </div>
+  </div>
+
+  <form #signup="ngForm" fxFlex fxFlex.lt-lg="100%" (ngSubmit)="signUp(signup)">
+    <div fxLayout="column" fxLayoutAlign="center">
+      <div fxLayout="column" class="authCard">
+        <h1>Create your account</h1>
+        <p class="text-muted mb-30">Created for developers by developers</p>
+        <mat-form-field color="primary" appearance="fill">
+          <mat-label>First name</mat-label>
+          <input matInput type="text" name="firstName" ngModel required />
+        </mat-form-field>
+        <mat-form-field color="primary" appearance="fill">
+          <mat-label>Last name</mat-label>
+          <input matInput type="text" name="lastName" ngModel required />
+        </mat-form-field>
+        <mat-form-field color="primary" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" name="emailId" ngModel required />
+        </mat-form-field>
+        <mat-form-field color="primary" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" name="password" ngModel required />
+        </mat-form-field>
+        <mat-radio-group
+          name="gender"
+          ngModel
+          fxLayout
+          fxLayoutGap="3%"
+          fxLayoutAlign="start center"
+          aria-label="Select an option"
+        >
+          <mat-label class="mr-40">Select a gender</mat-label>
+          <mat-radio-button value="MALE">Male</mat-radio-button>
+          <mat-radio-button value="FEMALE">Female</mat-radio-button>
+        </mat-radio-group>
+        <div class="pd-20">
+          <mat-checkbox
+            (change)="iAgree = !iAgree"
+            color="primary"
+            name="agree"
+            ngModel
+            [checked]="iAgree"
+            >I agree with the terms and conditions.</mat-checkbox
+          >
+        </div>
+        <button
+          [disabled]="!signup.form.invalid && !iAgree"
+          class="custom-btn"
+          fxFlex
+          mat-raised-button
+          color="primary"
+        >
+          Create my account
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

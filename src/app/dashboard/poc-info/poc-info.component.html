@@ -1,0 +1,89 @@
+<div
+  class="mb-20 mt-20"
+  fxLayout
+  fxLayoutAlign="center center"
+  fxLayoutGap="1%"
+>
+  <div fxlayout="column" fxLayoutAlign="center center" class="dotMid">
+    POC's
+  </div>
+  <h1 class="text-center mb-0 text-muted">
+    {{ isEditMode ? "Edit your POC" : "Create your POC" }}
+  </h1>
+</div>
+
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <div fxLayout fxLayoutAlign="center center" class="createCard">
+    <div fxLayout="column" class="text-muted" fxFlex="70%">
+      <mat-form-field  class="mt-30" appearance="fill">
+        <mat-label>Poc Title</mat-label>
+        <input [disabled]="isEditMode" matInput ngModel name="title" maxlength="200" required />
+      </mat-form-field>
+      <section fxLayout>
+        <textarea
+          fxFlex="50%"
+          class="variable-textarea"
+          name="description"
+          [(ngModel)]="markdown"
+        ></textarea>
+        <markdown
+          fxFlex
+          class="variable-binding"
+          [data]="markdown"
+          lineNumbers
+          [start]="1"
+        ></markdown>
+      </section>
+
+      <mat-form-field class="mt-30" appearance="fill">
+        <mat-label>Enter your Poc tags</mat-label>
+        <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip
+            class="text-dark"
+            *ngFor="let fruit of tags"
+            [selectable]="selectable"
+            selected
+            [removable]="removable"
+            (removed)="remove(fruit)"
+          >
+            {{ fruit.name }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            name="tags"
+            ngModel
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-list>
+        <mat-error>Add atleast 1 tag</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="mt-30 mb-10" appearance="fill">
+        <mat-label>Code link</mat-label>
+        <input matInput name="codeLink" ngModel required />
+        <mat-error>Code link is required</mat-error>
+      </mat-form-field>
+      <mat-form-field class="mt-30 mb-10" appearance="fill">
+        <mat-label>Hosted link</mat-label>
+        <input matInput name="hostedLink" ngModel required />
+        <mat-error>Hosted link is required</mat-error>
+      </mat-form-field>
+
+      <div class="mt-30 mb-30" fxLayout fxLayoutAlign="end" fxLayoutGap="3%">
+        <button
+          routerLink="/dashboard"
+          type="button"
+          fxFlex="20%"
+          color="primary"
+          mat-raised-button
+        >
+          Cancel
+        </button>
+        <button fxFlex="20%" color="accent" mat-raised-button>Submit</button>
+      </div>
+    </div>
+  </div>
+</form>

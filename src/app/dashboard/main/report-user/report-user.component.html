@@ -1,0 +1,14 @@
+<div style="padding: 12px" fxLayout="column" fxLayoutAlign="start">
+  <h1 style="text-align: center" class="mb-20">
+    <mat-icon>people</mat-icon> Report user : {{ this.data.name }}
+  </h1>
+  <div fxFlex fxLayout>
+    <mat-form-field style="width: 100%" appearance="fill">
+      <mat-label>Comment</mat-label>
+      <input matInput name="comment" [(ngModel)]="comment" />
+    </mat-form-field>
+  </div>
+  <button (click)="onSave()" color="accent" mat-raised-button>
+    Submit report
+  </button>
+</div>

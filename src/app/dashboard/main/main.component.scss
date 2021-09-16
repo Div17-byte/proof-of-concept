@@ -1,0 +1,31 @@
+.headerBox {
+  background-color: #1a1a17;
+  padding: 35px;
+  border-radius: 10px;
+}
+.infoBox {
+  background-color: hsla(60, 6%, 10%, 0.288);
+  padding: 35px;
+  border-radius: 10px;
+  transition: all 800ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  &:hover {
+    box-shadow: rgba(37, 182, 150, 0.2) 0px 8px 24px;
+  }
+}
+
+.dotMid {
+  color: white;
+  font-weight: 600;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background-color: #3278f4;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+.reportBtn {
+  color: red !important;
+}

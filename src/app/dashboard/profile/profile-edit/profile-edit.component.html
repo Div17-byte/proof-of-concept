@@ -1,0 +1,74 @@
+<div class="editForm">
+  <form #editForm="ngForm" (ngSubmit)="onSave(editForm)" fxLayout="column">
+    <h1 class="text-center mb-20">
+      <mat-icon matPrefix>edit</mat-icon> Edit your profile
+    </h1>
+
+    <div fxLayout fxLayoutGap="2%">
+      <!-- // firstName  -->
+      <mat-form-field fxFlex="50%" appearance="fill">
+        <mat-label>First name</mat-label>
+        <input
+          type="text"
+          name="firstName"
+          ngModel
+          matInput
+          placeholder="Ex. Jonny"
+          required
+        />
+      </mat-form-field>
+      <!-- // LastName  -->
+      <mat-form-field fxFlex="50%" appearance="fill">
+        <mat-label>Last name</mat-label>
+        <input
+          type="text"
+          name="lastName"
+          ngModel
+          matInput
+          placeholder="Ex. nis"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Gender</mat-label>
+      <mat-select name="gender" ngModel required>
+        <mat-option value="MALE"> Male </mat-option>
+        <mat-option value="FEMALE"> Female </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Status</mat-label>
+      <input type="text" name="status" ngModel matInput />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput name="description" ngModel></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Select your country</mat-label>
+      <mat-select name="countryId" ngModel>
+        <mat-option *ngFor="let item of countrylist" [value]="item.id">
+          {{ item.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <h3 class="mb-20 mt-20">
+      <mat-icon matPrefix>share</mat-icon> Social Links
+    </h3>
+
+    <mat-form-field fxFlex="50%" appearance="fill">
+      <mat-label>Github</mat-label>
+      <input type="text" name="github" ngModel matInput required />
+    </mat-form-field>
+    <div fxLayout fxLayoutAlign="flex-end" fxLayoutGap="5%">
+      <button mat-dialog-close mat-raised-button>Cancel</button>
+      <button type="submit" color="accent" mat-raised-button>
+        Update profile
+      </button>
+    </div>
+  </form>
+</div>

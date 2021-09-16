@@ -1,0 +1,143 @@
+<div fxLayout fxLayoutAlign="center center" class="createCard">
+  <div fxLayout="column" class="text-muted" fxFlex="70%">
+    <div
+      class="mb-20 mt-20"
+      fxLayout
+      fxLayoutAlign="center center"
+      fxLayoutGap="1%"
+    >
+      <div fxlayout="column" fxLayoutAlign="center center" class="dotMid">
+        POC
+      </div>
+      <div fxLayout="column">
+        <h1 class="text-center mb-0 text-muted">{{ poc?.title }}</h1>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div
+      class="mb-20 mt-20"
+      fxLayout
+      fxLayoutAlign="start center"
+      fxLayoutGap="1%"
+    >
+      <div fxlayout="column" fxLayoutAlign="center center">
+        <img
+          src="{{
+            poc?.user?.profileImageUrl || '../../../assets/images/user.png'
+          }}"
+          alt=""
+        />
+      </div>
+      <div fxLayout="column">
+        <h1 class="text-center mb-0 text-muted">{{ poc?.user?.firstName }}</h1>
+      </div>
+    </div>
+    <div fxLayout fxLayoutAlign="start center" fxLayoutGap="2%">
+      <h3 class="mb-0" fxFlex="10%">Added on:</h3>
+      <p>{{ poc?.createdAt | date: "dd-MMM-YYY" || "--" }}</p>
+    </div>
+    <div fxLayout fxLayoutAlign="start center" fxLayoutGap="2%">
+      <h3 class="mb-0" fxFlex="10%">Hosted on:</h3>
+      <a fxFlex class="text-muted" href="{{ poc?.hostedLink }}">{{
+        poc?.hostedLink
+      }}</a>
+      <button
+        (click)="savePoc(poc.proofOfConceptId)"
+        color="primary"
+        mat-raised-button
+      >
+        <mat-icon>drafts</mat-icon>
+        {{ poc?.isSavedByLoggedInUser ? "Remove from Saved" : "Save" }}
+      </button>
+      <button (click)="likePoc()" color="accent" mat-raised-button>
+        <mat-icon>{{ isFollowing ? "thumb_down" : "thumb_up" }}</mat-icon>
+        {{ isFollowing ? "Dislike" : "Like" }}
+      </button>
+      <button
+        (click)="editPoc()"
+        *ngIf="poc?.isCreatedByLoggedInUser"
+        mat-raised-button
+      >
+        <mat-icon>edit</mat-icon>
+        Edit
+      </button>
+    </div>
+
+    <div fxLayout fxLayoutAlign="start center" fxLayoutGap="2%">
+      <h3 class="mb-0" fxFlex="10%">Code Link:</h3>
+      <a class="text-muted" href="{{ poc?.codeLink }}">{{ poc?.codeLink }}</a>
+    </div>
+
+    <section class="mt-30 mb-30" fxLayout fxLayoutGap="5%">
+      <markdown
+        fxFlex
+        class="variable-binding"
+        [data]="markdown"
+        lineNumbers
+        [start]="1"
+      ></markdown>
+      <div fxLayout="column">
+        <h3>Liked by Users : {{ pocLikedByUsers?.length }}</h3>
+        <div
+          fxLayout
+          fxLayoutAlign="start center"
+          fxLayoutGap="5%"
+          *ngFor="let item of pocLikedByUsers"
+        >
+          <img class="imgLikedUsers" src="{{ item.profileImageUrl }}" alt="" />
+          <h4 class="mb-0">{{ item.firstName }}</h4>
+        </div>
+      </div>
+    </section>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Leave a comment</mat-label>
+      <textarea
+        maxlength="400"
+        minlength="3"
+        matInput
+        placeholder="Ex. I like your idea..."
+        #comment
+        name="userComment"
+        [(ngModel)]="userComment"
+      ></textarea>
+      <mat-hint align="end">{{ comment.value.length }}/400</mat-hint>
+    </mat-form-field>
+    <div fxLayout>
+      <button
+        (click)="submitComment()"
+        [disabled]="comment.value.length < 4"
+        fxFlex="20%"
+        color="accent"
+        mat-raised-button
+      >
+        Submit
+      </button>
+    </div>
+
+    <div fxLayout="column" class="mt-30">
+      <h3>Comments: {{ pocComments.length }}</h3>
+
+      <div
+        *ngFor="let item of pocComments"
+        class="mt-20 mb-10 userCommentBox"
+        fxLayout
+        fxLayoutAlign="start center"
+      >
+        <img
+          class="mr-20 commentsUserImg"
+          src="{{ item?.user?.profileImageUrl }}"
+          alt=""
+        />
+        <h2 fxFlex="10%" class="mb-0">{{ item?.user?.firstName }}</h2>
+        <p fxFlex="60%" class="mb-0">{{ item?.commentText }}</p>
+        <p fxFlex class="text-muted mb-0">
+          {{ item?.createdAt | date: "dd-MMM-YYYY" }}
+        </p>
+        <!-- <button class="btn-danger" (click)="deleteComment()" mat-button>
+          Delete
+        </button> -->
+      </div>
+    </div>
+  </div>
+</div>

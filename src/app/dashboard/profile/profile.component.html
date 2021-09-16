@@ -1,0 +1,263 @@
+<section
+  class="mt-10"
+  fxLayout
+  fxLayoutAlign="center flex-start"
+  fxLayoutGap="5%"
+>
+  <div
+    fxFlex="60%"
+    fxLayout="column"
+    fxLayoutAlign="center flex-start"
+    class="profileCard"
+  >
+    <div fxFlex="100%" fxLayout fxLayoutGap="10%" class="profileBg">
+      <div fxLayout="column">
+        <div fxLayoutAlign="start center" class="profileImgContainer mb-20">
+          <img
+            src="{{
+              userInfo?.profileImageUrl || '../../../assets/images/user.png'
+            }}"
+            alt=""
+          />
+        </div>
+        <p
+          style="cursor: pointer"
+          (click)="changeProfileImage()"
+          class="text-center text-muted accent"
+        >
+          Change profile image
+        </p>
+        <div class="mt-20" fxLayout="column">
+          <h4 class="text-center mb-0 text-muted">About me</h4>
+          <p class="text-white">{{userInfo?.status || '--'}}</p>
+        </div>
+
+        <button *ngIf="!isLoggedInUser" class="mt-30" color="accent" mat-raised-button>{{userInfo.isFollowedByLoggedInUser}}</button>
+      </div>
+
+      <div
+        class="infoCard text-muted mt-30"
+        fxFlex
+        fxLayout="column"
+        fxLayoutGap="15px"
+        fxLayoutAlign="start"
+      >
+        <div
+          class="mb-30"
+          fxLayout
+          fxLayoutAlign="flex-start center"
+          fxLayoutGap="3%"
+        >
+          <mat-icon class="mr-10">account_box</mat-icon>
+          <h3 class="mb-0" fxFlex="30%">Firstname:</h3>
+          <p class="mb-0">{{ userInfo?.firstName }}</p>
+        </div>
+        <div
+          class="mb-30"
+          fxLayout
+          fxLayoutAlign="flex-start center"
+          fxLayoutGap="3%"
+        >
+          <mat-icon class="mr-10">account_box</mat-icon>
+          <h3 class="mb-0" fxFlex="30%">Lastname:</h3>
+          <p class="mb-0">{{ userInfo?.lastName }}</p>
+        </div>
+        <div
+          class="mb-30"
+          fxLayout
+          fxLayoutAlign="flex-start center"
+          fxLayoutGap="3%"
+        >
+          <mat-icon class="mr-10">people</mat-icon>
+          <h3 class="mb-0" fxFlex="30%">Gender:</h3>
+          <p class="mb-0">{{ userInfo?.gender }}</p>
+        </div>
+        <div
+          class="mb-30"
+          fxLayout
+          fxLayoutAlign="flex-start center"
+          fxLayoutGap="3%"
+        >
+          <mat-icon class="mr-10">mail</mat-icon>
+          <h3 class="mb-0" fxFlex="30%">Email:</h3>
+          <p class="mb-0">{{ userInfo?.emailId }}</p>
+        </div>
+        <div
+          class="mb-30"
+          fxLayout
+          fxLayoutAlign="flex-start center"
+          fxLayoutGap="3%"
+        >
+          <mat-icon class="mr-10">explore</mat-icon>
+          <h3 class="mb-0" fxFlex="30%">Country:</h3>
+          <p class="mb-0">{{ userInfo?.countryName || "--" }}</p>
+        </div>
+        <div
+          class="mb-30"
+          fxLayout
+          fxLayoutAlign="flex-start center"
+          fxLayoutGap="3%"
+        >
+          <mat-icon class="mr-10">check_circle</mat-icon>
+          <h3 class="mb-0" fxFlex="30%">Verified user:</h3>
+          <p
+            class="mb-0"
+            [ngStyle]="{ color: userInfo?.isEmailVerified ? 'green' : 'red' }"
+          >
+            {{ userInfo?.isEmailVerified ? "TRUE" : "FALSE" }}
+          </p>
+        </div>
+
+        <div
+          class="mt-30"
+          fxLayout
+          fxLayoutAlign="flex-start center"
+          fxLayoutGap="3%"
+        >
+          <mat-icon class="mr-10">description</mat-icon>
+          <h3 class="mb-0" fxFlex="30%">Description:</h3>
+          <p class="mb-0">
+            {{ userInfo?.description || "--" }}
+          </p>
+        </div>
+
+        <div class="socialLinks mt-40" fxLayout="column">
+          <h1 fxLayout fxLayoutAlign="start center">
+            <mat-icon class="mr-10">share</mat-icon> Social Links
+          </h1>
+          <h3 *ngFor="let item of userInfo?.socials">
+            {{ item.socialType }} : {{ item.url }}
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- // Right Column  -->
+  <div fxFlex="30%" fxLayout="column">
+    <div fxLayout="column" fxLayoutGap="5%" class="editBox curvedBorder">
+      <h4 fxLayout fxLayoutAlign="center center" class="text-white">
+        <mat-icon class="mr-10">link</mat-icon>
+        Quick links
+      </h4>
+      <mat-divider></mat-divider>
+      <h4
+        *ngIf="isLoggedInUser"
+        (click)="editProfile()"
+        fxLayout
+        fxLayoutAlign="start center"
+        class="text-white cursor"
+      >
+        <mat-icon class="mr-10">edit</mat-icon>
+        Edit public profile
+      </h4>
+      <mat-divider *ngIf="isLoggedInUser"></mat-divider>
+      <h4
+        routerLink=".."
+        fxLayout
+        fxLayoutAlign="start center"
+        class="text-white cursor"
+      >
+        <mat-icon class="mr-10">dashboard</mat-icon>
+        Go to dashboard
+      </h4>
+      <mat-divider></mat-divider>
+      <h4
+        *ngIf="isLoggedInUser"
+        isLoggedInUser
+        fxLayout
+        fxLayoutAlign="start center"
+        class="text-white cursor"
+      >
+        <mat-icon class="mr-10">password</mat-icon>
+        Change password
+      </h4>
+      <mat-divider *ngIf="isLoggedInUser"></mat-divider>
+      <h4
+      *ngIf="isLoggedInUser"
+        isLoggedInUser
+        fxLayout
+        fxLayoutAlign="start center"
+        class="text-white delete"
+      >
+        <mat-icon class="mr-10">delete</mat-icon>
+        Delete account
+      </h4>
+    </div>
+
+    <!-- // My Poc list -->
+    <div
+      *ngIf="isLoggedInUser"
+      fxLayout="column"
+      fxLayoutGap="5%"
+      class="editBox curvedBorder mt-30"
+    >
+      <h4 fxLayout fxLayoutAlign="center center" class="text-white">
+        <mat-icon class="mr-10">list</mat-icon>
+        My POC's
+      </h4>
+      <mat-divider></mat-divider>
+
+      <div fxLayout fxLayoutGap="3%" class="pocBox" *ngFor="let item of myPoc">
+        <div
+          fxLayout
+          fxLayoutAlign="center center"
+          class="pocCircle text-muted"
+        >
+          POC's
+        </div>
+        <div fxFlex class="text-muted" fxLayout="column">
+          <h5 class="mb-0">Title</h5>
+          <h3>{{ item.title }}</h3>
+        </div>
+        <button
+          [routerLink]="'/dashboard/poc/edit/' + item.proofOfConceptId"
+          color="accent"
+          mat-raised-button
+        >
+          Edit
+        </button>
+      </div>
+    </div>
+
+    <!-- // Saved POCC  -->
+    <div
+      *ngIf="isLoggedInUser"
+      fxLayout="column"
+      fxLayoutGap="5%"
+      class="editBox curvedBorder mt-30"
+    >
+      <h4 fxLayout fxLayoutAlign="center center" class="text-white">
+        <mat-icon class="mr-10">list</mat-icon>
+        My Saved Poc's
+      </h4>
+      <mat-divider></mat-divider>
+
+      <div
+        fxLayout
+        fxLayoutGap="3%"
+        class="pocBox"
+        *ngFor="let item of savedPoc"
+      >
+        <div
+          fxLayout
+          fxLayoutAlign="center center"
+          class="pocCircle text-muted"
+        >
+          POC's
+        </div>
+        <div fxFlex class="text-muted" fxLayout="column">
+          <h5 class="mb-0">Title</h5>
+          <h3>{{ item.title }}</h3>
+        </div>
+        <button
+          [routerLink]="'/dashboard/poc/edit/' + item.proofOfConceptId"
+          color="accent"
+          mat-raised-button
+        >
+          Edit
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

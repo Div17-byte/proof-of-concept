@@ -1,0 +1,32 @@
+<div fxLayout class="otpCard">
+  <div fxFlex fxFlex.lt-lg="100%" fxLayout="column" fxLayoutAlign="center">
+    <div fxLayout="column" class="authCard">
+      <h1>Enter verificiton code</h1>
+      <p class="text-muted mb-30">Enter your otp to verify your account</p>
+      <ng-otp-input
+        class="mb-20"
+        (onInputChange)="onOtpChange($event)"
+        [config]="{ length: 6 }"
+      ></ng-otp-input>
+      <button
+        (click)="verifyOtp()"
+        [disabled]="otp.toString().length < 6"
+        class="custom-btn"
+        fxFlex
+        mat-raised-button
+        color="accent"
+      >
+        Confirm
+      </button>
+      <button
+        class="custom-btn mt-20"
+        mat-dialog-close
+        fxFlex
+        mat-raised-button
+        color="accent"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>
