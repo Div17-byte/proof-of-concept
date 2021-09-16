@@ -10,7 +10,7 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class ProfileEditComponent implements OnInit, AfterViewInit {
   constructor(
-    private dialogRef: MatDialogRef<any>,
+    private dialogRef: MatDialogRef<ProfileEditComponent>,
     private service: DataService
   ) {}
   profile: any = {};
@@ -59,11 +59,18 @@ export class ProfileEditComponent implements OnInit, AfterViewInit {
         : [],
     };
 
+    delete preparedObj['github'];
+
     console.log('preparedObj:', preparedObj);
 
-    this.service.apiPutUser(preparedObj).subscribe((res) => {
-      console.log('User updated', res);
-      this.dialogRef.close(true);
-    });
+    this.service.apiPutUser(preparedObj).subscribe(
+      (res) => {
+        console.log('User updated', res);
+        this.dialogRef.close(true);
+      },
+      () => {
+        this.dialogRef.close(true);
+      }
+    );
   }
 }

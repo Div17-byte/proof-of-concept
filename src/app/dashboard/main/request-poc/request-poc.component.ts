@@ -35,7 +35,7 @@ export class RequestPocComponent implements OnInit {
     };
     this.service.apiRequestPoc(obj).subscribe((res) => {
       console.log('Poc requested');
-      this.dialogRef.close();
+      this.dialogRef.close(true);
       this.snackbar.open('Poc requested successfully', 'close', {
         duration: 2000,
       });
