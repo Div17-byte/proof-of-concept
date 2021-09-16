@@ -10,24 +10,26 @@
 
           <div fxLayout class="mb-20">
             <button
+              class="fw500"
               fxFlex="30%"
               routerLink="poc/create"
               color="accent"
               fxFlex="30%"
               mat-raised-button
             >
-              Create Poc
+              CREATE POC
             </button>
           </div>
           <div fxLayout>
             <button
+              class="fw500"
               fxFlex="30%"
               (click)="requestPoc()"
               color="primary"
               fxFlex="30%"
               mat-raised-button
             >
-              Request Poc
+              REQUEST POC
             </button>
           </div>
         </div>
@@ -108,7 +110,7 @@
         mat-stretch-tabs
         class="mat-elevation-z4"
       >
-        <mat-tab label="POC(s) List">
+        <mat-tab label="POC List">
           <div class="mb-60 mt-20" fxLayout="column" fxLayoutGap="3%">
             <section *ngIf="selectedChip === 0">
               <!-- // Search by Title  -->
@@ -359,7 +361,10 @@
             </section>
           </div>
         </mat-tab>
-        <mat-tab label="Requested POC(s)">
+        <mat-tab
+          style="font-weight: 500; font-size: 1rem"
+          label="Requested POC(s)"
+        >
           <!-- // Request List  -->
           <div fxFlex class="mb-60" fxLayout="column">
             <mat-divider class="mb-40"></mat-divider>

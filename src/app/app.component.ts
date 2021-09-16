@@ -16,5 +16,5 @@ export class AppComponent implements OnInit {
       this.service.isLoggedIn = true;
     }
   }
-  title = 'poc';
+  title = 'Proof of Requirement';
 }
