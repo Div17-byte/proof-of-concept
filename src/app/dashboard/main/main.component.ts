@@ -34,7 +34,8 @@ export class MainComponent implements OnInit {
 
   requestPoc(): void {
     const dialogRef = this.dialog.open(RequestPocComponent, {
-      width: '400px',
+      width: '600px',
+      height:'550px',
       panelClass: 'dialog-custom',
     });
     dialogRef.afterClosed().subscribe((res) => {

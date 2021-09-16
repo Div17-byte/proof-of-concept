@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { DialogLoginComponent } from '../dialog-login/dialog-login.component';
 
 @Component({
   selector: 'app-dialog-otp',
@@ -12,7 +13,8 @@ export class DialogOtpComponent implements OnInit {
   constructor(
     private service: DataService,
     public dialogRef: MatDialogRef<any>,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
   userInfo: any;
   otp = 0;
@@ -30,6 +32,7 @@ export class DialogOtpComponent implements OnInit {
       (res) => {
         console.log('res:', res);
         this.dialogRef.close();
+        this.dialog.open(DialogLoginComponent)
         this.router.navigate(['/']);
       },
       (err) => {

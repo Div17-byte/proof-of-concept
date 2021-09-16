@@ -1,13 +1,20 @@
-<div class="requestcard" fxLayout="column">
-  <h2>Request Poc's</h2>
+<div class="requestcard mt-30" fxLayout="column">
+  <h1 class="text-center">
+    <mat-icon>control_point_duplicate</mat-icon> Request Poc's
+  </h1>
 
   <mat-form-field appearance="fill">
     <mat-label>Title</mat-label>
     <input matInput type="text" name="title" [(ngModel)]="title" />
   </mat-form-field>
   <mat-form-field appearance="fill">
-    <mat-label>description</mat-label>
-    <input matInput type="text" name="description" [(ngModel)]="description" />
+    <mat-label>Description</mat-label>
+    <textarea
+      class="textarea"
+      matInput
+      name="description"
+      [(ngModel)]="description"
+    ></textarea>
   </mat-form-field>
 
   <mat-form-field appearance="fill">

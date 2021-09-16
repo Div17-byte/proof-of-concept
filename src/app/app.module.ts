@@ -21,6 +21,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
 
 // Components
 import { DialogLoginComponent } from './auth/dialog-login/dialog-login.component';
@@ -85,6 +86,7 @@ import { RequestPocComponent } from './dashboard/main/request-poc/request-poc.co
     HttpClientModule,
     MatTooltipModule,
     MatSelectModule,
+    MatTabsModule,
   ],
   providers: [
     {

@@ -28,16 +28,13 @@ export class DialogSignupComponent implements OnInit {
       (res) => {
         console.log(res);
         this.service.currentUser = form.value;
-
         const dialogRef = this.dialog.open(DialogOtpComponent, {
           disableClose: true,
-        });
-        dialogRef.afterClosed().subscribe((res) => {
-          this.dialogRef.close();
         });
         this.snackbar.open('User registered successfully', 'close', {
           duration: 3000,
         });
+        this.dialogRef.close();
       },
       (err) => {
         console.log('err:', err);
