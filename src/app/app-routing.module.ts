@@ -34,6 +34,10 @@ const routes: Routes = [
         component: PocInfoComponent,
       },
       {
+        path: 'poc/create/:requestId',
+        component: PocInfoComponent,
+      },
+      {
         path: 'poc/edit/:editId',
         component: PocInfoComponent,
       },

@@ -17,13 +17,12 @@ export class DataService {
   notificaiton = new Subject();
   editProfileData = new BehaviorSubject<object>({});
   ownProfile: any = {};
-
   // ping a
 
-  pingServer():void {
-    this.http.get(`${this.base}/ping`).subscribe(res=> {
+  pingServer(): void {
+    this.http.get(`${this.base}/ping`).subscribe((res) => {
       console.log('Server pinged');
-    })
+    });
   }
   // Get country
   apiGetCountry(): Observable<any> {
@@ -34,16 +33,16 @@ export class DataService {
   apiGetUser(): Observable<any> {
     return this.http.get(`${this.base}/user`);
   }
-  apiGetUserById(id:string): Observable<any> {
+  apiGetUserById(id: string): Observable<any> {
     return this.http.get(`${this.base}/user/${id}`);
   }
 
   // Follow other users
 
-  apiFollowUser(id:string):Observable<any> {
-    return this.http.put(`${this.base}/user/${id}/follow-toggle`,null)
+  apiFollowUser(id: string): Observable<any> {
+    return this.http.put(`${this.base}/user/${id}/follow-toggle`, null);
   }
-  
+
   apiGetNotifications(): Observable<any> {
     return this.http.get(`${this.base}/notification`);
   }
@@ -149,11 +148,12 @@ export class DataService {
     return this.http.post(`${this.base}/report`, obj);
   }
 
-
-
   // REquest POC
 
-  apiRequestPoc(obj:any):Observable<any> {
-    return this.http.post(`${this.base}/request`,obj)
+  apiRequestPoc(obj: any): Observable<any> {
+    return this.http.post(`${this.base}/request`, obj);
+  }
+  apiGetAllRequestPoc(): Observable<any> {
+    return this.http.get(`${this.base}/request/all`);
   }
 }

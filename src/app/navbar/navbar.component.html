@@ -82,11 +82,11 @@
         alt=""
       />
       <h2 (click)="menuTrigger.openMenu()" class="mb-0 text-white">
-        {{ userInfo?.firstName || "" }}
-        {{ userInfo?.lastName?.charAt(0) || "" }}
+        {{ userInfo?.firstName || '' }}
+        {{ userInfo?.lastName?.charAt(0) || '' }}
       </h2>
     </div>
-    <mat-menu class="custom-menu" #menu="matMenu">
+    <mat-menu class="custom-user.menu" #menu="matMenu">
       <button routerLink="/dashboard/me" mat-menu-item>
         <mat-icon>person</mat-icon>
         My Profile

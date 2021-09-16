@@ -24,14 +24,29 @@ export class MainComponent implements OnInit {
   byTags: any[] = [];
   byTitle: any[] = [];
   byUser: any[] = [];
-
+  requestedPoc: any[] = [];
   filterEnabled = false;
   searchInput = '';
   ngOnInit(): void {
-    this.dialog.open(RequestPocComponent, {
-      width:'400px',
-    })
     this.getAllPoc();
+    this.getRequestedPoc();
+  }
+
+  requestPoc(): void {
+    this.dialog.open(RequestPocComponent, {
+      width: '400px',
+      panelClass: 'dialog-custom',
+    });
+  }
+
+  createRequestedPoc(id: string): void {
+    this.router.navigate(['/poc/create/' + id]);
+  }
+
+  getRequestedPoc(): void {
+    this.service.apiGetAllRequestPoc().subscribe((res) => {
+      this.requestedPoc = res;
+    });
   }
 
   listenKey(ev: any): void {

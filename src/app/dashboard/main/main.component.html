@@ -1,10 +1,12 @@
-<div class="mt-40" fxLayout fxLayoutAlign="space-around">
-  <div fxFlex="70%" fxLayout>
+<div class="mt-40" fxLayout fxLayoutAlign="center">
+  <div fxFlex="90%" fxLayout>
     <div fxFlex fxLayout="column" fxLayoutGap="5%">
       <div fxLayout class="headerBox">
         <div fxFlex fxLayout="column">
           <h1 class="text-white mb-0">Find POC's by the developers</h1>
-          <h3 class="text-muted">Search Poc's ,create your own or request Poc's from others</h3>
+          <h3 class="text-muted">
+            Search Poc's ,create your own or request Poc's from others
+          </h3>
           <div fxLayout fxLayoutAlign="space-between">
             <button
               routerLink="poc/create"
@@ -15,15 +17,14 @@
               Create Poc
             </button>
             <button
-            routerLink="poc/create"
-            color="primary"
-            fxFlex="30%"
-            mat-raised-button
-          >
-            Request Poc
-          </button>
+              (click)="requestPoc()"
+              color="primary"
+              fxFlex="30%"
+              mat-raised-button
+            >
+              Request Poc
+            </button>
           </div>
-
         </div>
         <div fxLayout="column">
           <lottie-player
@@ -97,56 +98,127 @@
       </mat-chip-list>
       <!-- // Search filter END HERE  -->
 
-      <div class="mb-60" fxLayout="column" fxLayoutGap="3%">
-        <section *ngIf="selectedChip === 0">
-          <!-- // Search by Title  -->
-          <h1 class="text-white mb-40" fxLayout fxLayoutAlign="center center">
-            <mat-icon color="primary" class="mb-0 mr-10">title</mat-icon> Poc's
-            List
-          </h1>
-          <mat-divider class="mb-40"></mat-divider>
-
-          <div [@listAnimation]="allPoc.length">
-            <div
-              fxLayout
-              fxLayoutAlign="start center"
-              fxLayoutGap="5%"
-              class="infoBox mb-10"
-              *ngFor="let item of allPoc"
-              @fadeAnimation
-            >
+      <div fxLayout fxLayoutGap="3%">
+        <div fxFlex="50%" class="mb-60" fxLayout="column" fxLayoutGap="3%">
+          <section *ngIf="selectedChip === 0">
+            <!-- // Search by Title  -->
+            <h1 class="text-white mb-40" fxLayout fxLayoutAlign="start center">
+              <mat-icon color="primary" class="mb-0 mr-10">title</mat-icon>
+              Poc's List
+            </h1>
+            <mat-divider class="mb-40"></mat-divider>
+            <div [@listAnimation]="allPoc.length">
               <div
-                fxFlex="5.4%"
-                fxlayout="column"
-                fxLayoutAlign="center center"
-                class="dotMid"
+                fxLayout
+                fxLayoutAlign="start center"
+                fxLayoutGap="5%"
+                class="infoBox mb-10"
+                *ngFor="let item of allPoc"
+                @fadeAnimation
               >
-                POC's
-              </div>
-              <div fxLayout="column">
-                <h5 class="text-muted mb-0">User</h5>
-                <h2 class="text-white">
-                  {{ item.user.firstName + " " + item.user.lastName }}
-                </h2>
-              </div>
-              <div fxFlex="30%" fxLayout="column">
-                <h5 class="text-muted mb-0">Title</h5>
-                <h2
-                  fxFlex
-                  style="max-width: 30px; text-overflow: ellipsis"
-                  class="text-white"
+                <div
+                  fxFlex="5.4%"
+                  fxlayout="column"
+                  fxLayoutAlign="center center"
+                  class="dotMid"
                 >
-                  {{ item.title }}
-                </h2>
+                  P
+                </div>
+                <div fxLayout="column">
+                  <h5 class="text-muted mb-0">User</h5>
+                  <h2 class="text-white">
+                    {{ item.user.firstName + ' ' + item.user.lastName }}
+                  </h2>
+                </div>
+                <div fxFlex="30%" fxLayout="column">
+                  <h5 class="text-muted mb-0">Title</h5>
+                  <h2
+                    fxFlex
+                    style="max-width: 30px; text-overflow: ellipsis"
+                    class="text-white"
+                  >
+                    {{ item.title }}
+                  </h2>
+                </div>
+                <div fxFlex="" fxLayout="column">
+                  <h5 class="text-muted mb-0">Created On</h5>
+                  <h3 class="text-muted">
+                    {{ item.createdAt | date }}
+                  </h3>
+                </div>
+                <!-- // Action button  -->
+                <div fxLayout="column" fxLayoutGap="3%">
+                  <button
+                    (click)="viewPoc(item.proofOfConceptId)"
+                    mat-stroked-button
+                    color="primary"
+                  >
+                    View more
+                  </button>
+                  <button
+                    *ngIf="item.isCreatedByLoggedInUser"
+                    (click)="editPoc(item.proofOfConceptId)"
+                    mat-stroked-button
+                    color="accent"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    *ngIf="!item.isCreatedByLoggedInUser"
+                    (click)="
+                      reportPoc(item.proofOfConceptId, item.user.firstName)
+                    "
+                    [disabled]="item.isReportedByLoggedInUser"
+                    class="reportBtn"
+                    mat-stroked-button
+                  >
+                    Report
+                  </button>
+                </div>
               </div>
-              <div fxFlex="" fxLayout="column">
-                <h5 class="text-muted mb-0">Created On</h5>
-                <h3 class="text-muted">
-                  {{ item.createdAt | date }}
-                </h3>
-              </div>
-              <!-- // Action button  -->
-              <div fxLayout="column" fxLayoutGap="3%">
+            </div>
+            <!-- // by Title end here  -->
+          </section>
+          <section *ngIf="selectedChip === 1">
+            <!-- // Search by Title  -->
+            <h1 class="text-white mb-40" fxLayout fxLayoutAlign="center center">
+              <mat-icon color="primary" class="mb-0 mr-10">title</mat-icon>
+              Search by Title
+            </h1>
+            <mat-divider class="mb-40"></mat-divider>
+            <div [@listAnimation]="byTitle.length">
+              <div
+                fxLayout
+                fxLayoutAlign="start center"
+                fxLayoutGap="5%"
+                class="infoBox mb-10"
+                *ngFor="let item of byTitle"
+              >
+                <div
+                  fxFlex="5.4%"
+                  fxlayout="column"
+                  fxLayoutAlign="center center"
+                  class="dotMid"
+                >
+                  <h4 class="mat-caption">POC's</h4>
+                </div>
+                <div fxLayout="column">
+                  <h5 class="text-muted mb-0">User</h5>
+                  <h1 class="text-white">
+                    {{ item.user.firstName + ' ' + item.user.lastName }}
+                  </h1>
+                </div>
+                <div fxLayout="column">
+                  <h5 class="text-muted mb-0">Title</h5>
+                  <h1 class="text-white">{{ item.title }}</h1>
+                </div>
+                <div fxFlex fxLayout="column">
+                  <h5 class="text-muted mb-0">Created On</h5>
+                  <h3 class="text-muted">
+                    {{ item.createdAt | date }}
+                  </h3>
+                </div>
+                <!-- // Action button  -->
                 <button
                   (click)="viewPoc(item.proofOfConceptId)"
                   mat-stroked-button
@@ -162,178 +234,157 @@
                 >
                   Edit
                 </button>
-                <button
-                *ngIf="!item.isCreatedByLoggedInUser"
-                  (click)="
-                    reportPoc(item.proofOfConceptId, item.user.firstName)
-                  "
-                  [disabled]="item.isReportedByLoggedInUser"
-                  class="reportBtn"
-                  mat-stroked-button
-                >
-                  Report
-                </button>
+                <button class="reportBtn" mat-stroked-button>Report</button>
               </div>
             </div>
-          </div>
-          <!-- // by Title end here  -->
-        </section>
+            <!-- // by Title end here  -->
+            <h3 *ngIf="byTitle.length === 0" class="text-muted text-center">
+              No Poc's found by Title
+            </h3>
+          </section>
+          <section *ngIf="selectedChip === 2">
+            <!-- // Search by Tags  -->
+            <h1 class="text-white mb-40" fxLayout fxLayoutAlign="center center">
+              <mat-icon color="primary" class="mb-0 mr-10">tags</mat-icon>
+              Search by Tags
+            </h1>
+            <mat-divider class="mb-40"></mat-divider>
+            <div [@listAnimation]="byTags.length">
+              <div
+                fxLayout
+                fxLayoutAlign="start center"
+                fxLayoutGap="5%"
+                class="infoBox"
+                *ngFor="let item of byTags"
+              >
+                <div
+                  fxFlex="5.4%"
+                  fxlayout="column"
+                  fxLayoutAlign="center center"
+                  class="dotMid"
+                >
+                  POC's
+                </div>
+                <div fxLayout="column">
+                  <h5 class="text-muted mb-0">User</h5>
+                  <h2 class="text-white">
+                    {{ item.user.firstName + ' ' + item.user.lastName }}
+                  </h2>
+                </div>
+                <div fxFlex fxLayout="column">
+                  <h5 class="text-muted mb-0">Title</h5>
+                  <h2 class="text-white">{{ item.title }}</h2>
+                </div>
+                <div fxFlex fxLayout="column">
+                  <h5 class="text-muted mb-0">Created On</h5>
+                  <h3 class="text-muted">
+                    {{ (item.createdAt | date) || '--' }}
+                  </h3>
+                </div>
+                <button mat-stroked-button color="primary">View more</button>
+              </div>
+            </div>
+            <!-- // Tag end here  -->
+            <h3 *ngIf="byTags.length === 0" class="text-muted text-center">
+              No Poc's found by Tags
+            </h3>
+          </section>
+          <section *ngIf="selectedChip === 3">
+            <!-- // Search by People  -->
+            <h1 class="text-white mb-40" fxLayout fxLayoutAlign="center center">
+              <mat-icon color="primary" class="mb-0 mr-10">person</mat-icon>
+              Search by People
+            </h1>
+            <mat-divider class="mb-40"></mat-divider>
+            <div>
+              <div
+                fxLayout="row wrap"
+                fxLayoutAlign="start center"
+                fxLayoutGap="5%"
+                [@listAnimation]="allPoc.length"
+              >
+                <!-- // Info Box Start Here  -->
+                <div
+                  fxLayout="column"
+                  fxLayoutAlign="center center"
+                  fxLayoutGap="3%"
+                  class="infoBox mb-10"
+                  *ngFor="let item of byUser"
+                  fxFlex="29.66%"
+                >
+                  <div fxlayout fxLayoutAlign="center center" class="dotMid">
+                    <img src="{{ item.profileImageUrl }}" alt="" />
+                  </div>
+                  <div fxFlex fxLayout="column">
+                    <h5 class="text-muted mb-0 text-center">User</h5>
+                    <h4 class="text-white">
+                      {{ item.firstName }} {{ item.lastName }}
+                    </h4>
+                  </div>
+                  <button mat-stroked-button color="primary">
+                    View profile
+                  </button>
+                </div>
+                <h3 class="text-muted text-center" *ngIf="byUser.length === 0">
+                  No Users found
+                </h3>
+                <!-- // Box End here  -->
+              </div>
+            </div>
+          </section>
+        </div>
 
-        <section *ngIf="selectedChip === 1">
-          <!-- // Search by Title  -->
-          <h1 class="text-white mb-40" fxLayout fxLayoutAlign="center center">
-            <mat-icon color="primary" class="mb-0 mr-10">title</mat-icon> Search
-            by Title
+        <!-- // Request List  -->
+        <div fxFlex class="mb-60" fxLayout="column">
+          <h1 class="text-white mb-40" fxLayout fxLayoutAlign="start center">
+            <mat-icon color="primary" class="mb-0 mr-10">title</mat-icon>
+            Requested Poc's
           </h1>
           <mat-divider class="mb-40"></mat-divider>
-
-          <div [@listAnimation]="byTitle.length">
+          <div [@listAnimation]="allPoc.length">
             <div
               fxLayout
               fxLayoutAlign="start center"
               fxLayoutGap="5%"
               class="infoBox mb-10"
-              *ngFor="let item of byTitle"
+              *ngFor="let item of requestedPoc"
+              @fadeAnimation
             >
-              <div
-                fxFlex="5.4%"
-                fxlayout="column"
-                fxLayoutAlign="center center"
-                class="dotMid"
-              >
-                <h4 class="mat-caption">POC's</h4>
-              </div>
               <div fxLayout="column">
                 <h5 class="text-muted mb-0">User</h5>
-                <h1 class="text-white">
-                  {{ item.user.firstName + " " + item.user.lastName }}
-                </h1>
+                <h2 class="text-white">
+                  {{ item.user.firstName + ' ' + item.user.lastName }}
+                </h2>
               </div>
-              <div fxLayout="column">
+              <div fxFlex="30%" fxLayout="column">
                 <h5 class="text-muted mb-0">Title</h5>
-                <h1 class="text-white">{{ item.title }}</h1>
+                <h2
+                  fxFlex
+                  style="max-width: 30px; text-overflow: ellipsis"
+                  class="text-white"
+                >
+                  {{ item.title }}
+                </h2>
               </div>
-              <div fxFlex fxLayout="column">
-                <h5 class="text-muted mb-0">Created On</h5>
+              <div fxFlex="" fxLayout="column">
+                <h5 class="text-muted mb-0">Requested On</h5>
                 <h3 class="text-muted">
                   {{ item.createdAt | date }}
                 </h3>
               </div>
               <!-- // Action button  -->
-              <button
-                (click)="viewPoc(item.proofOfConceptId)"
-                mat-stroked-button
-                color="primary"
-              >
-                View more
-              </button>
-              <button
-                *ngIf="item.isCreatedByLoggedInUser"
-                (click)="editPoc(item.proofOfConceptId)"
-                mat-stroked-button
-                color="accent"
-              >
-                Edit
-              </button>
-              <button class="reportBtn" mat-stroked-button>Report</button>
+              <div fxLayout="column" fxLayoutGap="3%">
+                <button
+                  (click)="createRequestedPoc(item.proofOfConceptId)"
+                  mat-stroked-button
+                  color="primary"
+                >
+                  Create
+                </button>
+              </div>
             </div>
           </div>
-          <!-- // by Title end here  -->
-          <h3 *ngIf="byTitle.length === 0" class="text-muted text-center">
-            No Poc's found by Title
-          </h3>
-        </section>
-
-        <section *ngIf="selectedChip === 2">
-          <!-- // Search by Tags  -->
-          <h1 class="text-white mb-40" fxLayout fxLayoutAlign="center center">
-            <mat-icon color="primary" class="mb-0 mr-10">tags</mat-icon> Search
-            by Tags
-          </h1>
-          <mat-divider class="mb-40"></mat-divider>
-          <div [@listAnimation]="byTags.length">
-            <div
-              fxLayout
-              fxLayoutAlign="start center"
-              fxLayoutGap="5%"
-              class="infoBox"
-              *ngFor="let item of byTags"
-            >
-              <div
-                fxFlex="5.4%"
-                fxlayout="column"
-                fxLayoutAlign="center center"
-                class="dotMid"
-              >
-                POC's
-              </div>
-              <div fxLayout="column">
-                <h5 class="text-muted mb-0">User</h5>
-                <h2 class="text-white">
-                  {{ item.user.firstName + " " + item.user.lastName }}
-                </h2>
-              </div>
-              <div fxFlex fxLayout="column">
-                <h5 class="text-muted mb-0">Title</h5>
-                <h2 class="text-white">{{ item.title }}</h2>
-              </div>
-              <div fxFlex fxLayout="column">
-                <h5 class="text-muted mb-0">Created On</h5>
-                <h3 class="text-muted">
-                  {{ (item.createdAt | date) || "--" }}
-                </h3>
-              </div>
-              <button mat-stroked-button color="primary">View more</button>
-            </div>
-          </div>
-          <!-- // Tag end here  -->
-          <h3 *ngIf="byTags.length === 0" class="text-muted text-center">
-            No Poc's found by Tags
-          </h3>
-        </section>
-
-        <section *ngIf="selectedChip === 3">
-          <!-- // Search by People  -->
-          <h1 class="text-white mb-40" fxLayout fxLayoutAlign="center center">
-            <mat-icon color="primary" class="mb-0 mr-10">person</mat-icon>
-            Search by People
-          </h1>
-          <mat-divider class="mb-40"></mat-divider>
-
-          <div>
-            <div
-              fxLayout="row wrap"
-              fxLayoutAlign="start center"
-              fxLayoutGap="5%"
-              [@listAnimation]="allPoc.length"
-            >
-              <!-- // Info Box Start Here  -->
-              <div
-                fxLayout="column"
-                fxLayoutAlign="center center"
-                fxLayoutGap="3%"
-                class="infoBox mb-10"
-                *ngFor="let item of byUser"
-                fxFlex="29.66%"
-              >
-                <div fxlayout fxLayoutAlign="center center" class="dotMid">
-                  <img src="{{ item.profileImageUrl }}" alt="" />
-                </div>
-                <div fxFlex fxLayout="column">
-                  <h5 class="text-muted mb-0 text-center">User</h5>
-                  <h4 class="text-white">
-                    {{ item.firstName }} {{ item.lastName }}
-                  </h4>
-                </div>
-                <button mat-stroked-button color="primary">View profile</button>
-              </div>
-              <h3 class="text-muted text-center" *ngIf="byUser.length === 0">
-                No Users found
-              </h3>
-              <!-- // Box End here  -->
-            </div>
-          </div>
-        </section>
+        </div>
       </div>
     </div>
   </div>
