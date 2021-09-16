@@ -1,43 +1,45 @@
-<div fxLayout="column">
-    <h2>Request Poc's</h2>
+<div class="requestcard" fxLayout="column">
+  <h2>Request Poc's</h2>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Title</mat-label>
-        <input matInput type="text" name="title" [(ngModel)]="title">
-      </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>description</mat-label>
-        <input matInput type="text" name="description" [(ngModel)]="description">
-      </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput type="text" name="title" [(ngModel)]="title" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>description</mat-label>
+    <input matInput type="text" name="description" [(ngModel)]="description" />
+  </mat-form-field>
 
-      <mat-form-field  appearance="fill">
-        <mat-label>Enter your Poc tags</mat-label>
-        <mat-chip-list #chipList aria-label="Fruit selection">
-          <mat-chip
-            class="text-dark"
-            *ngFor="let fruit of tags"
-            [selectable]="selectable"
-            selected
-            [removable]="removable"
-            (removed)="remove(fruit)"
-          >
-            {{ fruit.name }}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-          </mat-chip>
-          <input
-            name="tags"
-            ngModel
-            [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="add($event)"
-          />
-        </mat-chip-list>
-        <mat-error>Add atleast 1 tag</mat-error>
-      </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your Poc tags</mat-label>
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip
+        class="text-dark"
+        *ngFor="let fruit of tags"
+        [selectable]="selectable"
+        selected
+        [removable]="removable"
+        (removed)="remove(fruit)"
+      >
+        {{ fruit.name }}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input
+        name="tags"
+        ngModel
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="addOnBlur"
+        (matChipInputTokenEnd)="add($event)"
+      />
+    </mat-chip-list>
+    <mat-error>Add atleast 1 tag</mat-error>
+  </mat-form-field>
 
-      <div fxLayout fxLayoutAlign="flex-end" fxLayoutGap="3%">
-          <button mat-dialog-close mat-raised-button>Cancel</button>
-          <button (click)="requestPoc()" color="accent" mat-raised-button>Request Poc</button>
-      </div>
+  <div fxLayout fxLayoutAlign="flex-end" fxLayoutGap="3%">
+    <button mat-dialog-close mat-raised-button>Cancel</button>
+    <button (click)="requestPoc()" color="accent" mat-raised-button>
+      Request Poc
+    </button>
+  </div>
 </div>

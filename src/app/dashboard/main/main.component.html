@@ -321,7 +321,11 @@
                       {{ item.firstName }} {{ item.lastName }}
                     </h4>
                   </div>
-                  <button mat-stroked-button color="primary">
+                  <button
+                    routerLink="/dashboard/user/{{ item.id }}"
+                    mat-stroked-button
+                    color="primary"
+                  >
                     View profile
                   </button>
                 </div>
@@ -375,7 +379,7 @@
               <!-- // Action button  -->
               <div fxLayout="column" fxLayoutGap="3%">
                 <button
-                  (click)="createRequestedPoc(item.proofOfConceptId)"
+                  (click)="createRequestedPoc(item.id)"
                   mat-stroked-button
                   color="primary"
                 >

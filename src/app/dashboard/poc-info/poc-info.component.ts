@@ -23,6 +23,7 @@ export class PocInfoComponent implements OnInit {
   editId = '';
   isEditMode = false;
   poc: any = {};
+  requestId = null;
   constructor(
     private service: DataService,
     private router: Router,
@@ -36,6 +37,8 @@ export class PocInfoComponent implements OnInit {
       this.isEditMode = true;
       this.getPocById();
     } else this.isEditMode = false;
+
+    this.requestId = this.route.snapshot.params.requestId;
   }
 
   getPocById(): void {
@@ -63,7 +66,7 @@ export class PocInfoComponent implements OnInit {
     const obj = {
       ...form.value,
       tags: this.tags,
-      requestId: null,
+      requestId: this.requestId || null,
     };
     console.log('obj:', obj);
 

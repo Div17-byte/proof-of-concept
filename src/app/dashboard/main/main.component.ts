@@ -33,14 +33,17 @@ export class MainComponent implements OnInit {
   }
 
   requestPoc(): void {
-    this.dialog.open(RequestPocComponent, {
+    const dialogRef = this.dialog.open(RequestPocComponent, {
       width: '400px',
       panelClass: 'dialog-custom',
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) this.getRequestedPoc();
     });
   }
 
   createRequestedPoc(id: string): void {
-    this.router.navigate(['/poc/create/' + id]);
+    this.router.navigate(['/dashboard/poc/create/' + id]);
   }
 
   getRequestedPoc(): void {

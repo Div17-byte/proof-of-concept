@@ -8,16 +8,25 @@
     POC's
   </div>
   <h1 class="text-center mb-0 text-muted">
-    {{ isEditMode ? "Edit your POC" : "Create your POC" }}
+    {{ isEditMode ? 'Edit your POC' : 'Create your POC' }}
   </h1>
 </div>
 
 <form #form="ngForm" (ngSubmit)="onSubmit(form)">
   <div fxLayout fxLayoutAlign="center center" class="createCard">
     <div fxLayout="column" class="text-muted" fxFlex="70%">
-      <mat-form-field  class="mt-30" appearance="fill">
+      <mat-form-field class="mt-30 mb-20" appearance="fill">
         <mat-label>Poc Title</mat-label>
-        <input [disabled]="isEditMode" matInput ngModel name="title" maxlength="200" required />
+        <input
+          [disabled]="isEditMode"
+          matInput
+          ngModel
+          name="title"
+          maxlength="50"
+          required
+          #title
+        />
+        <mat-hint align="end">{{ title.value.length }}/30</mat-hint>
       </mat-form-field>
       <section fxLayout>
         <textarea

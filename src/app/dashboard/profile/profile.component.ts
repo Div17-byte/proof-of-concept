@@ -20,14 +20,14 @@ export class ProfileComponent implements OnInit {
   myPoc: any[] = [];
   savedPoc: any[] = [];
   isLoggedInUser = false;
-  isFollowing = false
-  publicUserId = ''
+  isFollowing = false;
+  publicUserId = '';
   ngOnInit(): void {
-    this.publicUserId = this.route.snapshot.params.publicUserId
-    if(this.publicUserId) {
-      this.service.apiGetUserById(this.publicUserId).subscribe((res:any)=> {
-        this.userInfo = res
-      })
+    this.publicUserId = this.route.snapshot.params.publicUserId;
+    if (this.publicUserId) {
+      this.service.apiGetUserById(this.publicUserId).subscribe((res: any) => {
+        this.userInfo = res;
+      });
     } else {
       this.getLoggedInUser();
       this.getOwnPoc();
@@ -38,13 +38,17 @@ export class ProfileComponent implements OnInit {
       ? (this.isLoggedInUser = true)
       : (this.isLoggedInUser = false);
 
+    if (this.publicUserId === this.service.currentUser.id) {
+      this.isLoggedInUser = true;
+      this.getOwnPoc();
+      this.getSavedPoc();
+    }
   }
 
-
   followUser(): void {
-    this.service.apiFollowUser(this.publicUserId).subscribe(res=> {
-      this.isFollowing = true
-    })
+    this.service.apiFollowUser(this.publicUserId).subscribe((res) => {
+      this.isFollowing = true;
+    });
   }
 
   getSavedPoc(): void {
