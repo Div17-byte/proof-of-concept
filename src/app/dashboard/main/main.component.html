@@ -4,8 +4,8 @@
       <div fxLayout class="headerBox">
         <div fxFlex fxLayout="column">
           <h1 class="text-white mb-0">Find POC's by the developers</h1>
-          <h3 class="text-muted">search Poc's or create your own</h3>
-          <div fxLayout>
+          <h3 class="text-muted">Search Poc's ,create your own or request Poc's from others</h3>
+          <div fxLayout fxLayoutAlign="space-between">
             <button
               routerLink="poc/create"
               color="accent"
@@ -14,7 +14,16 @@
             >
               Create Poc
             </button>
+            <button
+            routerLink="poc/create"
+            color="primary"
+            fxFlex="30%"
+            mat-raised-button
+          >
+            Request Poc
+          </button>
           </div>
+
         </div>
         <div fxLayout="column">
           <lottie-player

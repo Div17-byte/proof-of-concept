@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { fadeAnimation, listAnimation } from 'src/app/animations/app.animation';
 import { DataService } from 'src/app/services/data.service';
 import { ReportUserComponent } from './report-user/report-user.component';
+import { RequestPocComponent } from './request-poc/request-poc.component';
 
 @Component({
   selector: 'app-main',
@@ -27,6 +28,9 @@ export class MainComponent implements OnInit {
   filterEnabled = false;
   searchInput = '';
   ngOnInit(): void {
+    this.dialog.open(RequestPocComponent, {
+      width:'400px',
+    })
     this.getAllPoc();
   }
 

@@ -43,6 +43,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthtokenInterceptor } from './interceptors/authtoken.interceptor';
 import { PocViewComponent } from './dashboard/poc-view/poc-view.component';
 import { ReportUserComponent } from './dashboard/main/report-user/report-user.component';
+import { RequestPocComponent } from './dashboard/main/request-poc/request-poc.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +59,7 @@ import { ReportUserComponent } from './dashboard/main/report-user/report-user.co
     ProfileEditComponent,
     PocViewComponent,
     ReportUserComponent,
+    RequestPocComponent,
   ],
   imports: [
     BrowserModule,

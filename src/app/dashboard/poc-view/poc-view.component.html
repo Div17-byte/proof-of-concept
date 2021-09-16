@@ -38,10 +38,11 @@
     </div>
     <div fxLayout fxLayoutAlign="start center" fxLayoutGap="2%">
       <h3 class="mb-0" fxFlex="10%">Hosted on:</h3>
-      <a fxFlex class="text-muted" href="{{ poc?.hostedLink }}">{{
+      <a fxFlex class="text-muted" href="{{ poc?.hostedLink }}" target="_blank">{{
         poc?.hostedLink
       }}</a>
       <button
+      *ngIf="!poc?.isCreatedByLoggedInUser"
         (click)="savePoc(poc.proofOfConceptId)"
         color="primary"
         mat-raised-button
@@ -49,7 +50,7 @@
         <mat-icon>drafts</mat-icon>
         {{ poc?.isSavedByLoggedInUser ? "Remove from Saved" : "Save" }}
       </button>
-      <button (click)="likePoc()" color="accent" mat-raised-button>
+      <button *ngIf="!poc?.isCreatedByLoggedInUser" (click)="likePoc()" color="accent" mat-raised-button>
         <mat-icon>{{ isFollowing ? "thumb_down" : "thumb_up" }}</mat-icon>
         {{ isFollowing ? "Dislike" : "Like" }}
       </button>
@@ -65,7 +66,7 @@
 
     <div fxLayout fxLayoutAlign="start center" fxLayoutGap="2%">
       <h3 class="mb-0" fxFlex="10%">Code Link:</h3>
-      <a class="text-muted" href="{{ poc?.codeLink }}">{{ poc?.codeLink }}</a>
+      <a class="text-muted" href="{{ poc?.codeLink.startsWith('w') ? 'https://'+poc?.codeLink:poc?.codeLink }}" target="_blank">{{ poc?.codeLink }}</a>
     </div>
 
     <section class="mt-30 mb-30" fxLayout fxLayoutGap="5%">

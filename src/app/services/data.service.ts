@@ -23,7 +23,6 @@ export class DataService {
   pingServer():void {
     this.http.get(`${this.base}/ping`).subscribe(res=> {
       console.log('Server pinged');
-      
     })
   }
   // Get country
@@ -35,6 +34,16 @@ export class DataService {
   apiGetUser(): Observable<any> {
     return this.http.get(`${this.base}/user`);
   }
+  apiGetUserById(id:string): Observable<any> {
+    return this.http.get(`${this.base}/user/${id}`);
+  }
+
+  // Follow other users
+
+  apiFollowUser(id:string):Observable<any> {
+    return this.http.put(`${this.base}/user/${id}/follow-toggle`,null)
+  }
+  
   apiGetNotifications(): Observable<any> {
     return this.http.get(`${this.base}/notification`);
   }
@@ -138,5 +147,13 @@ export class DataService {
 
   apiReportPoc(obj: any): Observable<any> {
     return this.http.post(`${this.base}/report`, obj);
+  }
+
+
+
+  // REquest POC
+
+  apiRequestPoc(obj:any):Observable<any> {
+    return this.http.post(`${this.base}/request`,obj)
   }
 }

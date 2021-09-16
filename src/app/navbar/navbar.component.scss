@@ -22,5 +22,10 @@
   color: #fff;
 }
 ::ng-deep .custom-menu .mat-menu-content {
-  background-color: #1a1a17 !important;
+  background-color: #1D1F26 !important;
+}
+::ng-deep.mat-menu-panel {
+  width: 500px;
+  background-color: transparent !important;
+  max-width: none !important;
 }

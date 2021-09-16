@@ -21,6 +21,7 @@
           />
         </div>
         <p
+          *ngIf="isLoggedInUser"
           style="cursor: pointer"
           (click)="changeProfileImage()"
           class="text-center text-muted accent"
@@ -32,7 +33,7 @@
           <p class="text-white">{{userInfo?.status || '--'}}</p>
         </div>
 
-        <button *ngIf="!isLoggedInUser" class="mt-30" color="accent" mat-raised-button>{{userInfo.isFollowedByLoggedInUser}}</button>
+        <button (click)="followUser()" *ngIf="!isLoggedInUser" class="mt-30" color="accent" mat-raised-button>{{isFollowing ? 'Unfollow':'Follow'}}</button>
       </div>
 
       <div

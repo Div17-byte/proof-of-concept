@@ -83,8 +83,8 @@ export class PocViewComponent implements OnInit {
   likePoc(): void {
     this.service.apiLikePoc(this.poc.proofOfConceptId).subscribe((res) => {
       console.log('LIKE TOGGLE');
+      this.likedByUsers();
     });
-    this.likedByUsers();
     this.isFollowing = !this.isFollowing;
   }
 
